@@ -8,8 +8,7 @@ def dim_red_2D(data: np.ndarray) -> np.ndarray:
 
     Uses principal component analysis [1]_ for dimensionality reduction.
     Uses power iteration [2]_ to find the first principal component,
-    and uses Wielandt deflation [3]_
-    with power iteration and inverse iteration [4]_ to obtain the second.
+    and uses Wielandt deflation [3]_ with power iteration and inverse iteration [4]_ to obtain the second.
 
     Parameters
     ----------
