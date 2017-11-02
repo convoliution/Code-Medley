@@ -19,7 +19,7 @@ def check_type(var, dtype):
 
     '''
     if type(dtype) != type:
-        raise TypeError("unrecognized datatype {}"
+        raise TypeError("{} is not a datatype."
                         .format(dtype))
     if not isinstance(var, dtype):
         raise TypeError("expected {} to be {}, but was {} instead"
