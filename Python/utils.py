@@ -14,8 +14,8 @@ def check_type(var, dtype):
     Raises
     ------
     TypeError
-        If `dtype` is not a valid datatype
-        or if `var` is not of type `dtype`.
+        If `dtype` is not a valid datatype.
+        If `var` is not of type `dtype`.
 
     '''
     if type(dtype) != type:
