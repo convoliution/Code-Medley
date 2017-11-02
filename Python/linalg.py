@@ -153,7 +153,7 @@ def top_eigvec(A: np.ndarray) -> np.ndarray:
 
 def deflate(A: np.ndarray, eigvec: np.ndarray) -> np.ndarray:
     '''
-    Applies Wielandt deflation to `A` to remove the influence of `eigvec`.
+    Performs Wielandt deflation on `A` to remove the influence of `eigvec`.
 
     It's not feasible to internally verify that `eigvec` is an eigenvector
     of `A` due to floating point imprecision, so use with caution.
