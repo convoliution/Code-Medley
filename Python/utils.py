@@ -1,6 +1,6 @@
 import numpy as np
 
-def check_type(var, dtype):
+def check_type(var, dtype: type):
     '''
     Verifies that `var` is of type `dtype`.
 
@@ -8,7 +8,7 @@ def check_type(var, dtype):
     ----------
     var
         Variable whose datatype is dubious.
-    dtype
+    dtype : type
         Desired datatype of `var`.
 
     Raises
