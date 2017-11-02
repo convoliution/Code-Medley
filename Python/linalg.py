@@ -38,7 +38,7 @@ def eigvec_from_val(A: np.ndarray, eigval: float) -> np.ndarray:
     '''
     Estimates the eigenvector of `A` that corresponds to the eigenvalue `eigval`
 
-    Calculated via Rayleigh quotient iteration [1]_.
+    Calculated via inverse iteration [1]_.
 
     It's not feasible to internally verify that `eigval` is an eigenvalue
     of `A` due to floating point imprecision, so use with caution.
@@ -64,7 +64,7 @@ def eigvec_from_val(A: np.ndarray, eigval: float) -> np.ndarray:
 
     References
     ----------
-    .. [1] https://en.wikipedia.org/wiki/Rayleigh_quotient_iteration
+    .. [1] https://en.wikipedia.org/wiki/Inverse_iteration
 
     '''
     utils.check_type(A, np.ndarray)
