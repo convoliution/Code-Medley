@@ -49,4 +49,4 @@ def dim_red_2D(data: np.ndarray) -> np.ndarray:
     eigvec2 = linalg.eigvec_from_val(cov_mat, eigval2)
 
     transformation = np.concatenate((eigvec1, eigvec2), axis=1)
-    return np.dot(data, transformation)
+    return np.dot(data - np.mean(data, axis=0), transformation)
