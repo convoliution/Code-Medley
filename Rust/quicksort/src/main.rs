@@ -7,7 +7,7 @@ fn main() {
     let between = Range::new(-9, 10);
     let mut rng = rand::thread_rng();
 
-    let len = 10;
+    let len: usize = 10;
     let mut v: Vec<i32> = Vec::new();
     for _ in 0..len {
         v.push(between.ind_sample(&mut rng));
