@@ -23,8 +23,8 @@ fn main() {
 }
 
 // Hoare's partitioning method
-fn partition(v: &mut Vec<i32>, mut i_left: usize, mut i_right: usize) -> usize {
-    let val_pivot: i32 = v[i_left + (i_right - i_left)/2]; // val at median index
+fn partition<T: Ord + Copy>(v: &mut Vec<T>, mut i_left: usize, mut i_right: usize) -> usize {
+    let val_pivot: T = v[i_left + (i_right - i_left)/2]; // val at median index
     loop {
         while v[i_left] < val_pivot {
             i_left += 1;
@@ -42,7 +42,7 @@ fn partition(v: &mut Vec<i32>, mut i_left: usize, mut i_right: usize) -> usize {
     }
 }
 
-fn quicksort(v: &mut Vec<i32>, i_left: usize, i_right: usize) {
+fn quicksort<T: Ord + Copy>(v: &mut Vec<T>, i_left: usize, i_right: usize) {
     if i_left < i_right {
         let i_pivot: usize = partition(v, i_left, i_right);
         quicksort(v, i_left, i_pivot);
