@@ -32,7 +32,7 @@ def eigval_from_vec(A: np.ndarray, eigvec: np.ndarray) -> float:
     utils.check_dim(A, 2)
 
     eigvec = utils.to_col(eigvec)
-    return np.mean(np.dot(A, eigvec)/eigvec)
+    return np.mean((A @ eigvec)/eigvec)
 
 def eigvec_from_val(A: np.ndarray, eigval: float) -> np.ndarray:
     '''
@@ -74,7 +74,7 @@ def eigvec_from_val(A: np.ndarray, eigval: float) -> np.ndarray:
     x = np.random.random((A.shape[-1], 1)) # random vector
     x /= np.linalg.norm(x) # scale to length 1
     while(True):
-        Ax = np.dot(np.linalg.inv(A - eigeye), x)
+        Ax = (np.linalg.inv(A - eigeye)) @ x
         x_old = x
         x = Ax/(np.linalg.norm(Ax)+1e-16)
         if np.linalg.norm(np.abs(x) - np.abs(x_old)) < 1e-8:
@@ -109,7 +109,7 @@ def cov(A: np.ndarray) -> np.ndarray:
 
     mean = np.mean(A, axis=0).reshape((1, -1))
     diff = A - mean
-    return np.dot(diff.T, diff)/(A.shape[0] - 1)
+    return (diff.T @ diff)/(A.shape[0] - 1)
 
 def top_eigvec(A: np.ndarray) -> np.ndarray:
     '''
@@ -145,7 +145,7 @@ def top_eigvec(A: np.ndarray) -> np.ndarray:
     x = np.random.random((A.shape[-1], 1)) # random vector
     x /= np.linalg.norm(x) # scale to length 1
     while(True):
-        Ax = np.dot(A, x)
+        Ax = A @ x
         x_old = x
         x = Ax/(np.linalg.norm(Ax)+1e-16)
         if np.linalg.norm(np.abs(x) - np.abs(x_old)) < 1e-8:
@@ -188,5 +188,5 @@ def deflate(A: np.ndarray, eigvec: np.ndarray) -> np.ndarray:
     eigvec = utils.to_col(eigvec)
     eigval = eigval_from_vec(A, eigvec)
 
-    w = 1/(eigvec.size*eigvec) # np.dot(w.T, eigvec) == 1
-    return A - eigval*np.dot(eigvec, w.T)
+    w = 1/(eigvec.size*eigvec) # w.T @ eigvec == 1
+    return A - eigval*(eigvec @ w.T)
