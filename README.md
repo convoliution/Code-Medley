@@ -4,7 +4,7 @@ Little things I've written that aren't quite big enough to be in their own repos
 # Contents
 ## Rust
 ### `quicksort`
-- Implementation of Hoare's partitioning algorithm, with the median index selected as the pivot
+- Implementation of Hoare's partitioning algorithm, with the middle index selected as the pivot
 ## Python
 ### `datasci`
 - Implementation of a [PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)-based algorithm for reducing data to two dimensions
