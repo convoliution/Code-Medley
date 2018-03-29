@@ -24,7 +24,7 @@ fn main() {
 
 // Hoare's partitioning method
 fn partition<T: Ord + Copy>(v: &mut Vec<T>, mut i_left: usize, mut i_right: usize) -> usize {
-    let val_pivot: T = v[i_left + (i_right - i_left)/2]; // val at median index
+    let val_pivot: T = v[i_left + (i_right - i_left)/2]; // val at middle index
     loop {
         while v[i_left] < val_pivot {
             i_left += 1;
