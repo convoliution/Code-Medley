@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def check_type(var, dtype: type):
     '''
     Verifies that `var` is of type `dtype`.
@@ -25,6 +26,7 @@ def check_type(var, dtype: type):
         raise TypeError("expected {} to be {}, but was {} instead"
                         .format(var, dtype, type(var)))
 
+
 def check_dim(A: np.ndarray, dim: int):
     '''
     Verifies that np.ndarray `A` is of dimensionality `dim`.
@@ -48,6 +50,7 @@ def check_dim(A: np.ndarray, dim: int):
     if A.ndim != dim:
         raise ValueError("expected array of dimensionality {}, found dimensionality {} instead"
                          .format(dim, A.ndim))
+
 
 def to_col(v: np.ndarray) -> np.ndarray:
     '''
@@ -76,6 +79,7 @@ def to_col(v: np.ndarray) -> np.ndarray:
     if np.squeeze(v).ndim != 1:
         raise ValueError("unable to reshape into vector due to multiple non-one dimensions")
     return v.reshape((-1, 1))
+
 
 def to_row(v: np.ndarray) -> np.ndarray:
     '''

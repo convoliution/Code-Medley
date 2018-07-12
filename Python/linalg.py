@@ -1,6 +1,7 @@
 import numpy as np
 import utils
 
+
 def eigval_from_vec(A: np.ndarray, eigvec: np.ndarray) -> float:
     '''
     Finds the eigenvalue of `A` that corresponds to the eigenvector `eigvec`.
@@ -33,6 +34,7 @@ def eigval_from_vec(A: np.ndarray, eigvec: np.ndarray) -> float:
 
     eigvec = utils.to_col(eigvec)
     return np.mean((A @ eigvec)/eigvec)
+
 
 def eigvec_from_val(A: np.ndarray, eigval: float) -> np.ndarray:
     '''
@@ -80,6 +82,7 @@ def eigvec_from_val(A: np.ndarray, eigval: float) -> np.ndarray:
         if np.linalg.norm(np.abs(x) - np.abs(x_old)) < 1e-8:
             return x
 
+
 def cov(A: np.ndarray) -> np.ndarray:
     '''
     Estimates the covariance matrix of `A`.
@@ -110,6 +113,7 @@ def cov(A: np.ndarray) -> np.ndarray:
     mean = np.mean(A, axis=0).reshape((1, -1))
     diff = A - mean
     return (diff.T @ diff)/(A.shape[0] - 1)
+
 
 def top_eigvec(A: np.ndarray) -> np.ndarray:
     '''
@@ -150,6 +154,7 @@ def top_eigvec(A: np.ndarray) -> np.ndarray:
         x = Ax/(np.linalg.norm(Ax)+1e-16)
         if np.linalg.norm(np.abs(x) - np.abs(x_old)) < 1e-8:
             return x
+
 
 def deflate(A: np.ndarray, eigvec: np.ndarray) -> np.ndarray:
     '''

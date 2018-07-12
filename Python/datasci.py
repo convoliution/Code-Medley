@@ -2,6 +2,7 @@ import numpy as np
 import utils
 import linalg
 
+
 def dim_red_2D(data: np.ndarray) -> np.ndarray:
     '''
     Reduces data to two dimensions for easy visualization e.g. via plotting.
