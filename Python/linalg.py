@@ -1,5 +1,4 @@
 import numpy as np
-import utils
 
 
 def eigval_from_vec(A: np.ndarray, eigvec: np.ndarray) -> float:
@@ -21,18 +20,8 @@ def eigval_from_vec(A: np.ndarray, eigvec: np.ndarray) -> float:
     eigval : float
         Eigenvalue of `A` corresponding to eigenvector `eigvec`.
 
-    Raises
-    ------
-    TypeError
-        If `A` is not a np.ndarray.
-    ValueError
-        If `A` is not of dimensionality 2.
-
     '''
-    utils.check_type(A, np.ndarray)
-    utils.check_dim(A, 2)
-
-    eigvec = utils.to_col(eigvec)
+    eigvec = eigvec.reshape((-1, 1))
     return np.mean((A @ eigvec)/eigvec)
 
 
@@ -57,21 +46,11 @@ def eigvec_from_val(A: np.ndarray, eigval: float) -> np.ndarray:
     eigvec : np.ndarray
         Eigenvector of `A` corresponding to eigenvalue `eigval`.
 
-    Raises
-    ------
-    TypeError
-        If `A` is not a np.ndarray.
-    ValueError
-        If `A` is not of dimensionality 2.
-
     References
     ----------
     .. [1] https://en.wikipedia.org/wiki/Inverse_iteration
 
     '''
-    utils.check_type(A, np.ndarray)
-    utils.check_dim(A, 2)
-
     eigeye = eigval*np.eye(A.shape[-1])
     x = np.random.random((A.shape[-1], 1)) # random vector
     x /= np.linalg.norm(x) # scale to length 1
@@ -99,17 +78,7 @@ def cov(A: np.ndarray) -> np.ndarray:
     cov_mat : np.ndarray
         Estimates covariance matrix of `A`
 
-    Raises
-    ------
-    TypeError
-        If `A` is not a np.ndarray.
-    ValueError
-        If `A` is not of dimensionality 2.
-
     '''
-    utils.check_type(A, np.ndarray)
-    utils.check_dim(A, 2)
-
     mean = A.mean(axis=0, keepdims=True)
     diff = A - mean
     return (diff.T @ diff)/(A.shape[0] - 1)
@@ -131,21 +100,11 @@ def top_eigvec(A: np.ndarray) -> np.ndarray:
     eigvec : np.ndarray
         Top eigenvector of `A`.
 
-    Raises
-    ------
-    TypeError
-        If `A` is not a np.ndarray.
-    ValueError
-        If `A` is not of dimensionality 2.
-
     References
     ----------
     .. [1] https://en.wikipedia.org/wiki/Power_iteration
 
     '''
-    utils.check_type(A, np.ndarray)
-    utils.check_dim(A, 2)
-
     x = np.random.random((A.shape[-1], 1)) # random vector
     x /= np.linalg.norm(x) # scale to length 1
     while(True):
@@ -175,22 +134,12 @@ def deflate(A: np.ndarray, eigvec: np.ndarray) -> np.ndarray:
     deflated_A : np.ndarray
         `A` sans the influence of `eigvec`.
 
-    Raises
-    ------
-    TypeError
-        If `A` is not a np.ndarray.
-    ValueError
-        If `A` is not of dimensionality 2.
-
     References
     ----------
     .. [1] https://www.colorado.edu/engineering/cas/courses.d/IFEM.d/IFEM.AppE.d/IFEM.AppE.pdf
 
     '''
-    utils.check_type(A, np.ndarray)
-    utils.check_dim(A, 2)
-
-    eigvec = utils.to_col(eigvec)
+    eigvec = eigvec.reshape((-1, 1))
     eigval = eigval_from_vec(A, eigvec)
 
     w = 1/(eigvec.size*eigvec) # w.T @ eigvec == 1

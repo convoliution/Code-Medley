@@ -1,5 +1,4 @@
 import numpy as np
-import utils
 import linalg
 
 
@@ -24,13 +23,6 @@ def dim_red_2D(data: np.ndarray) -> np.ndarray:
         Data reduced to two dimensions.
         Array of shape (N, 2).
 
-    Raises
-    ------
-    TypeError
-        If `data` is not a np.ndarray.
-    ValueError
-        If `data` is not of dimensionality 2.
-
     References
     ----------
     .. [1] https://en.wikipedia.org/wiki/Principal_component_analysis
@@ -39,9 +31,6 @@ def dim_red_2D(data: np.ndarray) -> np.ndarray:
     .. [4] https://en.wikipedia.org/wiki/Inverse_iteration
 
     '''
-    utils.check_type(data, np.ndarray)
-    utils.check_dim(data, 2)
-
     cov_mat = linalg.cov(data)
 
     eigvec1 = linalg.top_eigvec(cov_mat)
