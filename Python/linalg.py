@@ -110,7 +110,7 @@ def cov(A: np.ndarray) -> np.ndarray:
     utils.check_type(A, np.ndarray)
     utils.check_dim(A, 2)
 
-    mean = np.mean(A, axis=0).reshape((1, -1))
+    mean = A.mean(axis=0, keepdims=True)
     diff = A - mean
     return (diff.T @ diff)/(A.shape[0] - 1)
 
