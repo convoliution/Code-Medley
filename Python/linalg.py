@@ -10,9 +10,9 @@ def eigval_from_vec(A: np.ndarray, eigvec: np.ndarray) -> float:
 
     Parameters
     ----------
-    A : np.ndarray
-        Two-dimensional array.
-    eigvec : np.ndarray
+    A : np.ndarray of shape (M, M)
+        Matrix.
+    eigvec : np.ndarray of shape (M, 1)
         Eigenvector of `A`.
 
     Returns
@@ -21,7 +21,6 @@ def eigval_from_vec(A: np.ndarray, eigvec: np.ndarray) -> float:
         Eigenvalue of `A` corresponding to eigenvector `eigvec`.
 
     '''
-    eigvec = eigvec.reshape((-1, 1))
     return np.mean((A @ eigvec)/eigvec)
 
 
@@ -36,14 +35,14 @@ def eigvec_from_val(A: np.ndarray, eigval: float) -> np.ndarray:
 
     Parameters
     ----------
-    A : np.ndarray
-        Two-dimensional array.
+    A : np.ndarray of shape (M, M)
+        Matrix.
     eigval : float
         Eigenvalue of `A`.
 
     Returns
     -------
-    eigvec : np.ndarray
+    eigvec : np.ndarray of shape (M, 1)
         Eigenvector of `A` corresponding to eigenvalue `eigval`.
 
     References
@@ -68,15 +67,13 @@ def cov(A: np.ndarray) -> np.ndarray:
 
     Parameters
     ----------
-    A : np.ndarray
-        Data array of shape (N, D)
-        where N is the number of data points
-        and D is the dimensionality of the data.
+    A : np.ndarray of shape (M, N)
+        Matrix.
 
     Returns
     -------
-    cov_mat : np.ndarray
-        Estimates covariance matrix of `A`
+    cov_mat : np.ndarray of shape (N, N)
+        Estimate of the covariance matrix of `A`.
 
     '''
     mean = A.mean(axis=0, keepdims=True)
@@ -92,12 +89,12 @@ def top_eigvec(A: np.ndarray) -> np.ndarray:
 
     Parameters
     ----------
-    A : np.ndarray
-        Two-dimensional array.
+    A : np.ndarray of shape (M, M)
+        Matrix.
 
     Returns
     -------
-    eigvec : np.ndarray
+    eigvec : np.ndarray of shape (M, 1)
         Top eigenvector of `A`.
 
     References
@@ -124,15 +121,15 @@ def deflate(A: np.ndarray, eigvec: np.ndarray) -> np.ndarray:
 
     Parameters
     ----------
-    A : np.ndarray
-        Array to be deflated.
-    eigvec : np.ndarray
+    A : np.ndarray of shape (M, M)
+        Matrix to be deflated.
+    eigvec : np.ndarray of shape (M, 1)
         Eigenvector of `A`.
 
     Returns
     -------
-    deflated_A : np.ndarray
-        `A` sans the influence of `eigvec`.
+    deflated_A : np.ndarray of shape (M, M)
+        `A` without the influence of `eigvec`.
 
     References
     ----------

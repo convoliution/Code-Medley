@@ -12,16 +12,13 @@ def dim_red_2D(data: np.ndarray) -> np.ndarray:
 
     Parameters
     ----------
-    data : np.ndarray
-        Data array of shape (N, D)
-        where N is the number of data points
-        and D is the dimensionality of the data.
+    data : np.ndarray of shape (N, D)
+        N data points in D dimensions.
 
     Returns
     -------
-    data_2D : np.ndarray
-        Data reduced to two dimensions.
-        Array of shape (N, 2).
+    data_2D : np.ndarray of shape (N, 2)
+        `data` reduced to two dimensions.
 
     References
     ----------
