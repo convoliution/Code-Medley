@@ -38,7 +38,7 @@ def eigvec_from_val(A: np.ndarray, eigval: float) -> np.ndarray:
     ----------
     A : np.ndarray
         Two-dimensional array.
-    eigvec : float
+    eigval : float
         Eigenvalue of `A`.
 
     Returns
