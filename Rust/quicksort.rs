@@ -1,25 +1,22 @@
-extern crate rand;
-
-use rand::distributions::{Range, IndependentSample};
-
-// sort a randomly generated vector
 fn main() {
-    let between = Range::new(-9, 10);
-    let mut rng = rand::thread_rng();
-
-    let len: usize = 10;
-    let mut v: Vec<i32> = Vec::new();
-    for _ in 0..len {
-        v.push(between.ind_sample(&mut rng));
-    }
+    let mut v: Vec<i32> = vec![7, 8, 3, 9, 5, 5, 1, 2, 6, 2];
 
     //print before sort
     println!("Unsorted:\n{:?}", v);
 
+    let len = v.len();
     quicksort(&mut v, 0, len-1);
 
     //print after sort
     println!("Sorted:\n{:?}", v);
+}
+
+fn quicksort<T: Ord + Copy>(v: &mut Vec<T>, i_left: usize, i_right: usize) {
+    if i_left < i_right {
+        let i_pivot: usize = partition(v, i_left, i_right);
+        quicksort(v, i_left, i_pivot);
+        quicksort(v, i_pivot+1, i_right);
+    }
 }
 
 // Hoare's partitioning method
@@ -39,13 +36,5 @@ fn partition<T: Ord + Copy>(v: &mut Vec<T>, mut i_left: usize, mut i_right: usiz
         } else {
             return i_right;
         }
-    }
-}
-
-fn quicksort<T: Ord + Copy>(v: &mut Vec<T>, i_left: usize, i_right: usize) {
-    if i_left < i_right {
-        let i_pivot: usize = partition(v, i_left, i_right);
-        quicksort(v, i_left, i_pivot);
-        quicksort(v, i_pivot+1, i_right);
     }
 }

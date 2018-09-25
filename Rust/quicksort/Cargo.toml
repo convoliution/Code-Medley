@@ -1,7 +1,0 @@
-[package]
-authors = ["Michael Liu <miliu@protonmail.com>"]
-name = "quicksort"
-version = "0.1.0"
-
-[dependencies]
-rand = "0.3.17"
