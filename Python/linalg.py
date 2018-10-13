@@ -51,8 +51,8 @@ def eigvec_from_val(A: np.ndarray, eigval: float) -> np.ndarray:
 
     """
     eigeye = eigval*np.eye(A.shape[-1])
-    x = np.random.random((A.shape[-1], 1)) # random vector
-    x /= np.linalg.norm(x) # scale to length 1
+    x = np.random.random((A.shape[-1], 1))  # random vector
+    x /= np.linalg.norm(x)  # scale to length 1
     while(True):
         Ax = (np.linalg.inv(A - eigeye)) @ x
         x_old = x
@@ -102,8 +102,8 @@ def top_eigvec(A: np.ndarray) -> np.ndarray:
     .. [1] https://en.wikipedia.org/wiki/Power_iteration
 
     """
-    x = np.random.random((A.shape[-1], 1)) # random vector
-    x /= np.linalg.norm(x) # scale to length 1
+    x = np.random.random((A.shape[-1], 1))  # random vector
+    x /= np.linalg.norm(x)  # scale to length 1
     while(True):
         Ax = A @ x
         x_old = x
@@ -139,5 +139,5 @@ def deflate(A: np.ndarray, eigvec: np.ndarray) -> np.ndarray:
     eigvec = eigvec.reshape((-1, 1))
     eigval = eigval_from_vec(A, eigvec)
 
-    w = 1/(eigvec.size*eigvec) # w.T @ eigvec == 1
+    w = 1/(eigvec.size*eigvec)  # w.T @ eigvec == 1
     return A - eigval*(eigvec @ w.T)
