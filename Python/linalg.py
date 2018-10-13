@@ -1,3 +1,5 @@
+from typing import Tuple
+
 import numpy as np
 
 
@@ -141,3 +143,49 @@ def deflate(A: np.ndarray, eigvec: np.ndarray) -> np.ndarray:
 
     w = 1/(eigvec.size*eigvec)  # w.T @ eigvec == 1
     return A - eigval*(eigvec @ w.T)
+
+
+def lu_decomp(A: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """
+    Performs LU decomposition [1]_ on `A` into factor matrices P, L, and U.
+
+    Parameters
+    ----------
+    A : np.ndarray of shape (M, M)
+        Matrix to be factorized.
+
+    Returns
+    -------
+    P : np.ndarray of shape (M, M)
+        Permutation matrix.
+    L : np.ndarray of shape (M, M)
+        Lower triangular matrix.
+    U : np.ndarray of shape (M, M)
+        Upper triangular matrix.
+
+    References
+    ----------
+    .. [1] https://en.wikipedia.org/wiki/LU_decomposition
+
+    """
+    if A.shape[0] != A.shape[1]:
+        raise ValueError("matrix must be square")
+
+    P = np.eye(A.shape[0])
+    L = np.eye(A.shape[0])
+    U = A.copy().astype(float)
+
+    for piv in range(A.shape[1]):
+        if U[piv,piv] == 0:
+            for row in range(piv+1, A.shape[0]):
+                if U[row,piv] != 0:
+                    P[:,[piv, row]] = P[:,[row, piv]]
+                    L[[piv, row],:piv] = L[[row, piv],:piv]
+                    U[[piv, row]] = U[[row, piv]]
+                    break
+            else:
+                continue
+        for row in range(piv+1, A.shape[0]):
+            L[row,piv]  = U[row,piv]/U[piv,piv]
+            U[row, : ] -= L[row,piv]*U[piv, : ]
+    return P, L, U
