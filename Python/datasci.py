@@ -3,7 +3,7 @@ import linalg
 
 
 def dim_red_2D(data: np.ndarray) -> np.ndarray:
-    '''
+    """
     Reduces data to two dimensions for easy visualization e.g. via plotting.
 
     Uses principal component analysis [1]_ for dimensionality reduction.
@@ -27,7 +27,7 @@ def dim_red_2D(data: np.ndarray) -> np.ndarray:
     .. [3] https://www.colorado.edu/engineering/cas/courses.d/IFEM.d/IFEM.AppE.d/IFEM.AppE.pdf
     .. [4] https://en.wikipedia.org/wiki/Inverse_iteration
 
-    '''
+    """
     cov_mat = linalg.cov(data)
 
     eigvec1 = linalg.top_eigvec(cov_mat)

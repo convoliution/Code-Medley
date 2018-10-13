@@ -2,7 +2,7 @@ import numpy as np
 
 
 def eigval_from_vec(A: np.ndarray, eigvec: np.ndarray) -> float:
-    '''
+    """
     Finds the eigenvalue of `A` that corresponds to the eigenvector `eigvec`.
 
     It's not feasible to internally verify that `eigvec` is an eigenvector
@@ -20,12 +20,12 @@ def eigval_from_vec(A: np.ndarray, eigvec: np.ndarray) -> float:
     eigval : float
         Eigenvalue of `A` corresponding to eigenvector `eigvec`.
 
-    '''
+    """
     return np.mean((A @ eigvec)/eigvec)
 
 
 def eigvec_from_val(A: np.ndarray, eigval: float) -> np.ndarray:
-    '''
+    """
     Estimates the eigenvector of `A` that corresponds to the eigenvalue `eigval`
 
     Calculated via inverse iteration [1]_.
@@ -49,7 +49,7 @@ def eigvec_from_val(A: np.ndarray, eigval: float) -> np.ndarray:
     ----------
     .. [1] https://en.wikipedia.org/wiki/Inverse_iteration
 
-    '''
+    """
     eigeye = eigval*np.eye(A.shape[-1])
     x = np.random.random((A.shape[-1], 1)) # random vector
     x /= np.linalg.norm(x) # scale to length 1
@@ -62,7 +62,7 @@ def eigvec_from_val(A: np.ndarray, eigval: float) -> np.ndarray:
 
 
 def cov(A: np.ndarray) -> np.ndarray:
-    '''
+    """
     Estimates the covariance matrix of `A`.
 
     Parameters
@@ -75,14 +75,14 @@ def cov(A: np.ndarray) -> np.ndarray:
     cov_mat : np.ndarray of shape (N, N)
         Estimate of the covariance matrix of `A`.
 
-    '''
+    """
     mean = A.mean(axis=0, keepdims=True)
     diff = A - mean
     return (diff.T @ diff)/(A.shape[0] - 1)
 
 
 def top_eigvec(A: np.ndarray) -> np.ndarray:
-    '''
+    """
     Estimates the top eigenvector of `A`.
 
     Calculated via the power iteration algorithm [1]_.
@@ -101,7 +101,7 @@ def top_eigvec(A: np.ndarray) -> np.ndarray:
     ----------
     .. [1] https://en.wikipedia.org/wiki/Power_iteration
 
-    '''
+    """
     x = np.random.random((A.shape[-1], 1)) # random vector
     x /= np.linalg.norm(x) # scale to length 1
     while(True):
@@ -113,7 +113,7 @@ def top_eigvec(A: np.ndarray) -> np.ndarray:
 
 
 def deflate(A: np.ndarray, eigvec: np.ndarray) -> np.ndarray:
-    '''
+    """
     Performs Wielandt deflation [1]_ on `A` to remove the influence of `eigvec`.
 
     It's not feasible to internally verify that `eigvec` is an eigenvector
@@ -135,7 +135,7 @@ def deflate(A: np.ndarray, eigvec: np.ndarray) -> np.ndarray:
     ----------
     .. [1] https://www.colorado.edu/engineering/cas/courses.d/IFEM.d/IFEM.AppE.d/IFEM.AppE.pdf
 
-    '''
+    """
     eigvec = eigvec.reshape((-1, 1))
     eigval = eigval_from_vec(A, eigvec)
 
