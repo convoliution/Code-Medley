@@ -24,6 +24,8 @@ Little things I've written that aren't quite big enough to be in their own repos
 - Function for the LU decomposition of a square matrix
 ### `utils.py`
 - Function for converting a camelCase string to snake_case
+### `dnd.py`
+- Object and utility class for simulating dice rolls
 ## `Rust/`
 ### `quicksort.rs`
 - Implementation of Hoare's partitioning algorithm, with the middle index selected as the pivot
