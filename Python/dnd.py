@@ -23,7 +23,7 @@ class Dice:
         rolls.sort()
         rolls = rolls[:, 1:].sum(axis=-1)
         rolls.sort()
-        return rolls[::-1]
+        return tuple(rolls[::-1])
 
     @staticmethod
     def roll_hit_points(num_faces, con, level):
@@ -45,4 +45,4 @@ class Dice:
             raise ValueError("number of faces must be an integer")
         rolls = np.random.randint(1, num_faces+1, self.num_dice)
         self.num_dice = 1
-        return rolls
+        return tuple(rolls)
