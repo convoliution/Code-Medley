@@ -3,26 +3,6 @@ class Node:
         self.value = value
         self.children = [None]*num_children
 
-class BinaryNode(Node):
-    def __init__(self, value):
-        super().__init__(value, 2)
-
-    @property
-    def left(self):
-        return self.children[0]
-
-    @left.setter
-    def left(self, node):
-        self.children[0] = node
-
-    @property
-    def right(self):
-        return self.children[1]
-
-    @right.setter
-    def right(self, node):
-        self.children[1] = node
-
 class LinkedList():
     class ListNode(Node):
         def __init__(self, value):
@@ -92,3 +72,90 @@ class LinkedList():
             prev_node = curr
             curr = next_node
         self.head = prev_node
+
+class BinaryTree():
+    class BinaryNode(Node):
+        def __init__(self, value):
+            super().__init__(value, 2)
+
+        @property
+        def left(self):
+            return self.children[0]
+
+        @left.setter
+        def left(self, node):
+            self.children[0] = node
+
+        @property
+        def right(self):
+            return self.children[1]
+
+        @right.setter
+        def right(self, node):
+            self.children[1] = node
+
+    def __init__(self):
+        self.root = None
+
+    def __str__(self):
+        return str(self.traverse("in"))
+
+    def __repr__(self):
+        return f"BinaryTree({self.__str__()})"
+
+    def insert(self, value):
+        new_node = self.BinaryNode(value)
+        if self.root is None:
+            self.root = new_node
+        else:
+            to_visit = [self.root]
+            while True:
+                curr = to_visit.pop(0)
+                if curr.left is None:
+                    curr.left = new_node
+                    return
+                if curr.right is None:
+                    curr.right = new_node
+                    return
+                to_visit.extend(curr.children)
+
+    def contains(self, value):
+        if self.root is None:
+            return False
+        to_visit = [self.root]
+        while to_visit:
+            curr = to_visit.pop()
+            if curr.value == value:
+                return True
+            else:
+                to_visit.extend(reversed([child for child in curr.children if child is not None]))
+        return False
+
+    def traverse(self, order):
+        if order == "pre":
+            def _traverse(elements, curr):
+                elements.append(curr.value)
+                if curr.left is not None:
+                    _traverse(elements, curr.left)
+                if curr.right is not None:
+                    _traverse(elements, curr.right)
+        elif order == "in":
+            def _traverse(elements, curr):
+                if curr.left is not None:
+                    _traverse(elements, curr.left)
+                elements.append(curr.value)
+                if curr.right is not None:
+                    _traverse(elements, curr.right)
+        elif order == "post":
+            def _traverse(elements, curr):
+                if curr.left is not None:
+                    _traverse(elements, curr.left)
+                if curr.right is not None:
+                    _traverse(elements, curr.right)
+                elements.append(curr.value)
+        else:
+            raise ValueError("order must be one of 'pre', 'in', or 'post'")
+        elements = []
+        if self.root is not None:
+            _traverse(elements, self.root)
+        return elements
