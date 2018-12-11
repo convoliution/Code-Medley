@@ -6,14 +6,35 @@ class Node:
 class BinaryNode(Node):
     def __init__(self, value):
         super().__init__(value, 2)
-        self.left = self.children[0]
-        self.right = self.children[1]
+
+    @property
+    def left(self):
+        return self.children[0]
+
+    @left.setter
+    def left(self, node):
+        self.children[0] = node
+
+    @property
+    def right(self):
+        return self.children[1]
+
+    @right.setter
+    def right(self, node):
+        self.children[1] = node
 
 class LinkedList():
     class ListNode(Node):
         def __init__(self, value):
             super().__init__(value, 1)
-            self.next = self.children[0]
+
+        @property
+        def next(self):
+            return self.children[0]
+
+        @next.setter
+        def next(self, node):
+            self.children[0] = node
 
     def __init__(self):
         self.head = None
