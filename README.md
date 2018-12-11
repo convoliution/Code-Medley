@@ -26,6 +26,8 @@ Little things I've written that aren't quite big enough to be in their own repos
 - Function for converting a camelCase string to snake_case
 ### `dnd.py`
 - Object and utility class for simulating dice rolls
+### `graphs.py`
+- Classes and algorithms for graphs
 ## `Rust/`
 ### `quicksort.rs`
 - Implementation of Hoare's partitioning algorithm, with the middle index selected as the pivot
