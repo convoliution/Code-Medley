@@ -3,7 +3,7 @@ class Node:
         self.value = value
         self.children = [None]*num_children
 
-class LinkedList():
+class LinkedList:
     class ListNode(Node):
         def __init__(self, value):
             super().__init__(value, 1)
@@ -73,7 +73,7 @@ class LinkedList():
             curr = next_node
         self.head = prev_node
 
-class BinaryTree():
+class BinaryTree:
     class BinaryNode(Node):
         def __init__(self, value):
             super().__init__(value, 2)
@@ -127,8 +127,7 @@ class BinaryTree():
             curr = to_visit.pop()
             if curr.value == value:
                 return True
-            else:
-                to_visit.extend(reversed([child for child in curr.children if child is not None]))
+            to_visit.extend(reversed([child for child in curr.children if child is not None]))
         return False
 
     def traverse(self, order):
