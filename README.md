@@ -28,6 +28,8 @@ Little things I've written that aren't quite big enough to be in their own repos
 - Object and utility class for simulating dice rolls
 ### `graphs.py`
 - Classes and algorithms for graphs
+### `binarysearch.py`
+- One-liner `Python<3.8` implementation of binary search
 ## `Rust/`
 ### `quicksort.rs`
 - Implementation of Hoare's partitioning algorithm, with the middle index selected as the pivot
