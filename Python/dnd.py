@@ -4,10 +4,11 @@ class Dice:
     """
     Object and utility class for simulating dice rolls.
 
-    As an example, to roll three twenty-sided dice (commonly notated as "3d20"):
+    As an example, to roll and add the results of three twenty-sided dice
+    (commonly notated as "3d20"):
     >>> from dnd import Dice as d
     >>> 3*d(20)
-    (15, 18,  7)
+    40
 
     """
     @staticmethod
@@ -38,4 +39,4 @@ class Dice:
     def __rmul__(self, num_dice):
         if not isinstance(num_dice, int) or num_dice < 1:
             raise ValueError("number of dice must be a positive integer")
-        return tuple(np.random.randint(1, self.num_faces+1, num_dice))
+        return np.random.randint(1, self.num_faces+1, num_dice).sum()
