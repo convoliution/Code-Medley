@@ -8,7 +8,9 @@ class Dice:
     (commonly notated as "3d20"):
     >>> from dnd import Dice as d
     >>> 3*d(20)
-    40
+    23
+    >>> 3*d(20)+3
+    38
 
     """
     @staticmethod
@@ -39,4 +41,26 @@ class Dice:
     def __rmul__(self, num_dice):
         if not isinstance(num_dice, int) or num_dice < 1:
             raise ValueError("number of dice must be a positive integer")
-        return np.random.randint(1, self.num_faces+1, num_dice).sum()
+        return _Roll(num_dice, self.num_faces)
+
+class _Roll:
+    def __init__(self, num_dice, num_faces, modifier=0):
+        self.num_dice = num_dice
+        self.num_faces = num_faces
+        self.modifier = modifier
+
+    def __repr__(self):
+        return str(sum(np.random.randint(1, self.num_faces+1, self.num_dice))
+                 + self.modifier)
+
+    def __add__(self, modifier):
+        return self.__class__(self.num_dice, self.num_faces, modifier)
+
+    def __mul__(self, factor):
+        raise NotImplementedError
+
+    def __truediv__(self, divisor):
+        raise NotImplementedError
+
+    def __floordiv__(self, divisor):
+        raise NotImplementedError
